@@ -44,20 +44,7 @@ gsap.from(".hero-content h2, .hero-content h3", {
   stagger: 0.2
 });
 
-// Scroll animations for Project Cards
-gsap.utils.toArray('.project-item').forEach((item, index) => {
-  gsap.from(item, {
-    opacity: 0,
-    y: 50,
-    duration: 0.8,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: item,
-      start: "top 90%",
-      toggleActions: "play none none none"
-    }
-  });
-});
+// Scroll animations for Project Cards are handled by AOS in index.html
 
 
 
