@@ -61,7 +61,7 @@ gsap.utils.toArray('.project-item').forEach((item, index) => {
 
 
 
-const words = ["Web Developer", "Problem Solver", "Tech Enthusiast", "MERN Stack Dev"];
+const words = ["Ashish Singh", "Full Stack Developer", "MERN Expert", "UI/UX Designer"];
 let i = 0, j = 0, isDeleting = false;
 
 function typeEffect() {
