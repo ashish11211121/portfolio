@@ -1,17 +1,21 @@
+// Initialize GSAP ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
+
 // In Portfolio.js Dark mode toggle
-// Dark mode toggle functionality
-// This code toggles dark mode on and off when the button is clicked
-// and saves the user's preference in local storage.
-// It also changes the button text to indicate the current mode.
-// The button text will show a sun icon for dark mode and a moon icon for light mode.
-// The dark mode class is added to the body element when dark mode is active.
 const toggleBtn = document.getElementById('dark-mode-toggle');
 const body = document.body;
 
 toggleBtn.addEventListener('click', () => {
   body.classList.toggle('dark-mode');
-  localStorage.setItem('mode', body.classList.contains('dark-mode') ? 'dark' : 'light');
-  toggleBtn.textContent = body.classList.contains('dark-mode') ? '🌞' : '🌙';
+  const isDark = body.classList.contains('dark-mode');
+  localStorage.setItem('mode', isDark ? 'dark' : 'light');
+  toggleBtn.textContent = isDark ? '🌞' : '🌙';
+  
+  // Animate body background color change for extra smoothness
+  gsap.to(body, {
+    backgroundColor: isDark ? '#0f172a' : '#f8fafc',
+    duration: 0.5
+  });
 });
 
 window.onload = () => {
@@ -22,42 +26,37 @@ window.onload = () => {
 };
 
 
-// GSAP Animations for scroll-triggered effects
+// GSAP Animations for hero section
 gsap.from(".hero-content h1", {
   opacity: 0,
-  y: -50,
-  duration: 1.5,
-  ease: "power4.out",
+  y: 30,
+  duration: 1.2,
+  ease: "power3.out",
+  delay: 0.2
 });
 
-// Scroll animations for Projects
-gsap.utils.toArray('.project-item').forEach(item => {
+gsap.from(".hero-content h2, .hero-content h3", {
+  opacity: 0,
+  y: 20,
+  duration: 1,
+  ease: "power3.out",
+  delay: 0.5,
+  stagger: 0.2
+});
+
+// Scroll animations for Project Cards
+gsap.utils.toArray('.project-item').forEach((item, index) => {
   gsap.from(item, {
     opacity: 0,
     y: 50,
-    duration: 1,
+    duration: 0.8,
+    ease: "power2.out",
     scrollTrigger: {
       trigger: item,
-      start: "top 80%",
-      end: "bottom 20%",
-      scrub: true,
-      toggleActions: "play none none none",
+      start: "top 90%",
+      toggleActions: "play none none none"
     }
   });
-});
-
-// Add additional project animations if needed
-gsap.from('.project-details', {
-  opacity: 0,
-  x: 100,
-  duration: 1,
-  stagger: 0.2,
-  scrollTrigger: {
-    trigger: '.projects-section',
-    start: 'top 80%',
-    end: 'bottom 20%',
-    scrub: true,
-  }
 });
 
 
